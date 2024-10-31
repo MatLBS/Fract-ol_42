@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:56:44 by matle-br          #+#    #+#             */
-/*   Updated: 2024/07/15 12:07:43 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:53:14 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,57 +18,86 @@ int	c_handler(t_fractol *frac)
 	mlx_destroy_window(frac->mlx, frac->win);
 	mlx_destroy_display(frac->mlx);
 	free(frac->mlx);
+	if (frac->keys)
+		free(frac->keys);
 	exit(EXIT_FAILURE);
 	return (0);
 }
 
-int	key_handler(int key, t_fractol *frac)
+int	key_starter(int key, t_fractol *frac)
 {
 	if (key == XK_Escape)
 		c_handler(frac);
-	else if (key == XK_Left)
+	if (key == XK_Left)
+		frac->keys->left_arrow = 1;
+	if (key == XK_Right)
+		frac->keys->right_arrow = 1;
+	if (key == XK_Up)
+		frac->keys->up_arrow = 1;
+	if (key == XK_Down)
+		frac->keys->down_arrow = 1;
+	if (key == XK_PLUS)
+		frac->keys->plus = 1;
+	if (key == XK_MIN)
+		frac->keys->minus = 1;
+	if (key == XK_c)
+		frac->keys->key_c = 1;
+	if (key == XK_x)
+		frac->keys->key_x = 1;
+	if (key == XK_r)
+		frac->keys->key_r = 1;
+	if (key == XK_y)
+		frac->keys->key_y = 1;
+	return (0);
+}
+
+int	key_closer(int key, t_fractol *frac)
+{
+	if (key == XK_Left)
+		frac->keys->left_arrow = 0;
+	if (key == XK_Right)
+		frac->keys->right_arrow = 0;
+	if (key == XK_Up)
+		frac->keys->up_arrow = 0;
+	if (key == XK_Down)
+		frac->keys->down_arrow = 0;
+	if (key == XK_PLUS)
+		frac->keys->plus = 0;
+	if (key == XK_MIN)
+		frac->keys->minus = 0;
+	if (key == XK_c)
+		frac->keys->key_c = 0;
+	if (key == XK_x)
+		frac->keys->key_x = 0;
+	if (key == XK_r)
+		frac->keys->key_r = 0;
+	if (key == XK_y)
+		frac->keys->key_y = 0;
+	return (0);
+}
+
+int	check_keys(t_fractol *frac)
+{
+	if (frac->keys->left_arrow == 1)
 		frac->sx -= (0.5 * frac->zoom);
-	else if (key == XK_Right)
+	if (frac->keys->right_arrow == 1)
 		frac->sx += (0.5 * frac->zoom);
-	else if (key == XK_Up)
+	if (frac->keys->up_arrow == 1)
 		frac->sy += (0.5 * frac->zoom);
-	else if (key == XK_Down)
+	if (frac->keys->down_arrow == 1)
 		frac->sy -= (0.5 * frac->zoom);
-	else if (key == XK_PLUS)
+	if (frac->keys->plus == 1)
 		frac->max += 10;
-	else if (key == XK_MIN)
+	if (frac->keys->minus == 1)
 		frac->max -= 10;
-	else if (key == XK_c)
+	if (frac->keys->key_c == 1)
 		frac->color_shift *= 2;
-	else if (key == XK_x)
+	if (frac->keys->key_x == 1)
 		frac->color_shift /= 2;
-	else if (key == XK_r)
+	if (frac->keys->key_r == 1)
 		init_struct(frac, frac->name);
-	else if (key == XK_y)
+	if (frac->keys->key_y == 1)
 		frac->flag *= -1;
 	draw_fractal(frac);
-	return (0);
-}
-
-int	zoom(int button, int x, int y, t_fractol *frac)
-{
-	(void)x;
-	(void)y;
-	if (button == Button4)
-		frac->zoom *= 0.95;
-	else if (button == Button5)
-		frac->zoom *= 1.05;
-	draw_fractal(frac);
-	return (0);
-}
-
-int	julia_track(int x, int y, t_fractol *f)
-{
-	if (ft_strcmp(f->name, "julia") == 0 && f->flag == 1)
-	{
-		f->x_julia = (rescale(x, X_MIN, X_MAX, WIDTH) * f->zoom) + f->sx;
-		f->y_julia = (rescale(y, Y_MAX, Y_MIN, HEIGHT) * f->zoom) + f->sy;
-		draw_fractal(f);
-	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 15:21:06 by matle-br          #+#    #+#             */
-/*   Updated: 2024/07/09 16:58:18 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:53:49 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	events_init(t_fractol *frac)
 {
-	mlx_hook(frac->win, KeyPress, KeyPressMask, key_handler, frac);
-	mlx_hook(frac->win, ButtonPress, ButtonPressMask, zoom, frac);
 	mlx_hook(frac->win, DestroyNotify, StructureNotifyMask, c_handler, frac);
+	mlx_hook(frac->win, KeyPress, KeyPressMask, key_starter, frac);
+	mlx_hook(frac->win, KeyRelease, KeyReleaseMask, key_closer, frac);
+	mlx_mouse_hook(frac->win, zoom, frac);
 	mlx_hook(frac->win, MotionNotify, PointerMotionMask, julia_track, frac);
+	mlx_loop_hook(frac->mlx, check_keys, frac);
 }
 
 int	main(int ac, char **av)
@@ -37,12 +39,10 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	init_mlx(&fractol);
-	ft_putendl_fd(WELCOME_MESSAGE, 1);
 	init_struct(&fractol, av[1]);
-	events_init(&fractol);
 	init_julia(&fractol, ac, av);
-	draw_fractal(&fractol);
+	print_msg();
+	events_init(&fractol);
 	mlx_loop(fractol.mlx);
-	c_handler(&fractol);
 	return (0);
 }

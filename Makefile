@@ -6,7 +6,7 @@
 #    By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/18 17:13:50 by matle-br          #+#    #+#              #
-#    Updated: 2024/06/20 13:19:35 by matle-br         ###   ########.fr        #
+#    Updated: 2024/10/31 10:24:45 by matle-br         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,13 @@ GREEN = \033[32m
 YELLOW = \033[33m
 ROUGE = \033[1;31m
 
-SRC_DIR = src/calcul.c src/events.c src/init.c src/main.c src/utils.c \
+SRC_DIR = src/calcul.c \
+			src/events.c \
+			src/events2.c \
+			src/init.c \
+			src/main.c \
+			src/utils.c \
+			src/utils2.c
 
 LIBFT_A = ./includes/libft/libft.a
 

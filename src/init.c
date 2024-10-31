@@ -6,7 +6,7 @@
 /*   By: matle-br <matle-br@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 15:57:06 by matle-br          #+#    #+#             */
-/*   Updated: 2024/06/24 10:44:32 by matle-br         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:42:57 by matle-br         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,27 @@ void	init_mlx(t_fractol *frac)
 	}
 }
 
+t_keys	*init_keys(void)
+{
+	t_keys	*keys;
+
+	keys = malloc(sizeof(t_keys));
+	if (!keys)
+		return (printf("Error while allocating keys.\n"), \
+			exit(EXIT_FAILURE), NULL);
+	keys->key_c = 0;
+	keys->key_r = 0;
+	keys->key_x = 0;
+	keys->key_y = 0;
+	keys->left_arrow = 0;
+	keys->right_arrow = 0;
+	keys->down_arrow = 0;
+	keys->up_arrow = 0;
+	keys->plus = 0;
+	keys->minus = 0;
+	return (keys);
+}
+
 void	init_struct(t_fractol *frac, char *str)
 {
 	frac->cx = 0.0;
@@ -58,6 +79,8 @@ void	init_struct(t_fractol *frac, char *str)
 	frac->zoom = 1.0;
 	frac->j = 0.0;
 	frac->flag = -1;
+	frac->first_action = get_time();
+	frac->keys = init_keys();
 }
 
 void	init_julia(t_fractol *frac, int ac, char **av)
