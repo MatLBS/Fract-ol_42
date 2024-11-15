@@ -24,22 +24,22 @@ or
 ```
 If you enter ./fractol julia you can add one or two arguments to change the fractal.
 
-For example if you enter ```./fractol julia 0.285 0.01```
+For example if you enter `./fractol julia 0.285 0.01`
 
 ![Screenshot from 2024-11-14 12-50-28](https://github.com/user-attachments/assets/1eed9e78-2678-4754-8182-cbfee6988587)
 
 ## Controls
-1. Press ```⬅️```, ```➡️```, ```⬆️```, ```⬇️``` to move the fractal.
+1. Press `⬅️`, `➡️`, `⬆️`, `⬇️` to move the fractal.
 
-2. Press ```x``` or ```c``` to change the color of the fractal.
+2. Press `x` or `c` to change the color of the fractal.
 
-3. Use the ```mouse wheel``` to zoom/dezoom.
+3. Use the `mouse wheel` to zoom/dezoom.
 
-4. You can press the buttons ```+``` / ```-``` to increase / decrease the precision of the fractal.
+4. You can press the buttons `+` / `-` to increase / decrease the precision of the fractal.
 
-5. Press ```r``` to reset the fractal.
+5. Press `r` to reset the fractal.
 
-6. Press ```y``` while on Julia set so you can change the fractal with your mouse.
+6. Press `y` while on Julia set so you can change the fractal with your mouse.
 
 ## Some Pictures of the project
 
