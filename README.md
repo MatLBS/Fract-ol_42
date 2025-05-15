@@ -1,4 +1,4 @@
-# 42-Fract-ol
+# Fract-ol_42
 
 ## Introduction
 Fract-ol is a graphical project from 42 School that involves generating beautiful fractals from the complex numbers of an iterative mathematical construct. 
